@@ -10,11 +10,20 @@ const PORT = process.env.PORT || 3001;
 // assign express to variable app 
 const app = express();
 
+
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('*', (req, res) => {
+
+// sets up homepage when server is loaded
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './Develop/public/index.html'));
+});
+
+// sets up response for /notes
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
 
 app.listen(PORT, () => {
