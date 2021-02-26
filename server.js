@@ -6,7 +6,6 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const nodemon = require('nodemon');
-const index = require('./Assets/index');
 
 // import notes database json
 const notes = require('./Develop/db/db.json');
@@ -35,20 +34,35 @@ app.get('/notes', (req, res) => {
 
 // set up API response
 app.get('/api/notes', (req, res) => {
-    // send back notes in json.  returns error "res.json is not a function"
     res.json(notes);
 });
 
-// set up POST request for notes
-app.post('/notes', (req, res) => {
-    // set id for note based on what the next index of the array will be
-    req.body.id = notes.length.toString();
 
-    const note = createNewNote(req.body, notes);
-    res.json(note);
+// set up POST request for notes
+app.post('/api/notes', function (req, res) {
+    let note = req.body;
+
+    console.log(note);
+    notes.push(note);
+    
+    res.send(notes);
 });
 
+// ALTERNATE POST REQUEST EXAMPLES:
 
+// POST request example with createNewNote()
+// app.post('/notes', (req, res) => {
+
+//      // set id for note based on what the next index of the array will be
+// ID should be unique so look into npm packages that create those ids.  otherwise if this works it is viable for MVP use.
+
+//     req.body.id = notes.length.toString();
+
+//     const note = createNewNote(req.body, notes);
+//     res.json(note);
+// });
+
+// POST Request example with validation:
 // app.post('/notes', (req, res) => {
 //     // set id for note based on what the next index of the array will be
 //     req.body.id = notes.length.toString();
@@ -60,6 +74,7 @@ app.post('/notes', (req, res) => {
 //         res.json(note);
 //     }
 // });
+
 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
