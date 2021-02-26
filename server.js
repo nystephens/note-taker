@@ -5,10 +5,11 @@ const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const nodemon = require('nodemon');
+
 
 // import notes database json
-const notes = require('./Develop/db/db.json');
+const notes = require('./db/db.json');
+const { json } = require('body-parser');
 
 // assign PORT to current process envirnoment or port 3001
 const PORT = process.env.PORT || 3001;
@@ -24,12 +25,12 @@ app.use(morgan("dev"));
 
 // sets up homepage when server is loaded
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './Develop/public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // sets up response for /notes
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 // set up API response
@@ -45,35 +46,14 @@ app.post('/api/notes', function (req, res) {
     console.log(note);
     notes.push(note);
     
-    res.send(notes);
+    // update db.json 
+    fs.writeFile('./db/db.json', JSON.stringify(notes), (error) => {
+        if (error) {
+            console.log(error);
+        }
+        res.send(notes);
+    });
 });
-
-// ALTERNATE POST REQUEST EXAMPLES:
-
-// POST request example with createNewNote()
-// app.post('/notes', (req, res) => {
-
-//      // set id for note based on what the next index of the array will be
-// ID should be unique so look into npm packages that create those ids.  otherwise if this works it is viable for MVP use.
-
-//     req.body.id = notes.length.toString();
-
-//     const note = createNewNote(req.body, notes);
-//     res.json(note);
-// });
-
-// POST Request example with validation:
-// app.post('/notes', (req, res) => {
-//     // set id for note based on what the next index of the array will be
-//     req.body.id = notes.length.toString();
-
-//     if (!validateNote(req.body)) {
-//         res.status(400).send('The note is not properly formatted.');
-//     } else {
-//         const note = createNewNote(req.body, notes);
-//         res.json(note);
-//     }
-// });
 
 
 app.listen(PORT, () => {
