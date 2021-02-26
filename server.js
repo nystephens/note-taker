@@ -41,7 +41,7 @@ app.get('/api/notes', (req, res) => {
 
 // set up POST request for notes
 app.post('/api/notes', function (req, res) {
-    let note = req.body;
+    let note = { title: req.body.title, text: req.body.text, id: notes.length };
 
     console.log(note);
     notes.push(note);
