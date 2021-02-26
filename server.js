@@ -5,6 +5,7 @@ const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const generateUniqueId = require('generate-unique-id');
 
 
 // import notes database json
@@ -41,11 +42,18 @@ app.get('/api/notes', (req, res) => {
 
 // set up POST request for notes
 app.post('/api/notes', function (req, res) {
-    let note = { title: req.body.title, text: req.body.text, id: notes.length };
+    let note = {
+        title: req.body.title,
+        text: req.body.text,
+        id: generateUniqueId({
+            length: 9,
+            useLetters: false
+        })
+    };
 
     console.log(note);
     notes.push(note);
-    
+
     // update db.json 
     fs.writeFile('./db/db.json', JSON.stringify(notes), (error) => {
         if (error) {
@@ -60,4 +68,3 @@ app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });
 
-// console.log(notes);
