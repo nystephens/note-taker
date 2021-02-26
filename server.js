@@ -6,6 +6,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const nodemon = require('nodemon');
+const index = require('./Assets/index');
 
 // import notes database json
 const notes = require('./Develop/db/db.json');
@@ -39,6 +40,15 @@ app.get('/api/notes', (req, res) => {
 });
 
 // set up POST request for notes
+app.post('/notes', (req, res) => {
+    // set id for note based on what the next index of the array will be
+    req.body.id = notes.length.toString();
+
+    const note = createNewNote(req.body, notes);
+    res.json(note);
+});
+
+
 // app.post('/notes', (req, res) => {
 //     // set id for note based on what the next index of the array will be
 //     req.body.id = notes.length.toString();
