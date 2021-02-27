@@ -24,18 +24,18 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 
-// sets up response for /notes
+// Sets up response for /notes
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-// set up API response
+// Sets up API response
 app.get('/api/notes', (req, res) => {
     res.json(notes);
 });
 
 
-// set up POST request for notes
+// Sets up POST request for notes
 app.post('/api/notes', function (req, res) {
     let note = {
         title: req.body.title,
@@ -58,7 +58,7 @@ app.post('/api/notes', function (req, res) {
     });
 });
 
-// sets up homepage when server is loaded
+// Sets up homepage when server is loaded
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
