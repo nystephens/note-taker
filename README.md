@@ -1,81 +1,54 @@
-# 11 Express.js: Note Taker
+# Note Taker
 
-## Your Task
+## Table of Contents
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [License](#license)
+5. [Contributing](#contributing)
+6. [Tests](#tests)
+7. [Questions](#questions)
 
-Your challenge is to create an application called Note Taker that can be used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file.
+## Description
+This is a simple note taking app that records notes for the user to reference at any time.
 
-The application’s front end has already been created. It's your job to build the back end, connect the two, and then deploy the entire application to Heroku.
+## Installation
+1.  Navigate to the GitHub repository ( https://github.com/nystphens/note-taker ) in your web browser and click the green dropdown menu that says “Code”.  Copy the SSH key to your clipboard and then open your terminal.  
 
-Before you start, clone [the starter code](https://github.com/coding-boot-camp/miniature-eureka).
+2.  In your terminal navigate to the directory you wish to house this repository.  
 
+3.  Type “git clone” into your command line and paste the SSH key you copied from the repository, then hit Enter.  A new file titled “readme-generator” containing the necessary files will appear in your chosen directory.  Due to file size, Node.js and is necessary  modules will not be cloned to your repository.  Please continue reading the instructions to find out how to install these modules on your computer. 
 
-## User Story
+4.  Since this application uses Node.js you will have to install Node and the required Node modules to operate it.  For detailed instructions on how  to install Node.js to your computer please visit: https://www.guru99.com/download-install-node-js.html  
 
-```
-AS A small business owner
-I WANT to be able to write and save notes
-SO THAT I can organize my thoughts and keep track of tasks I need to complete
-```
+5.  Once Node is successfully installed on your computer, navigate to the index.js file in your terminal.  For quick access you can right click index.js in VS Code and click the option “Open in Integrated Terminal”.  
 
+6.  Type the following command to install the proper node modules: “npm install”.  
 
-## Acceptance Criteria
+7.  Check your newly downloaded “node_modules” folder to ensure that the correct packages have been installed.  This app requires three npm packages that are listed as dependancies: "morgan", "express", and "generateUniqueId".  If these packages were not installed initially then you can install them by running the command: "npm install morgan express generateUniqueId".  
 
-```
-GIVEN a note-taking application
-WHEN I open the Note Taker
-THEN I am presented with a landing page with a link to a notes page
-WHEN I click on the link to the notes page
-THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column
-WHEN I enter a new note title and the note’s text
-THEN a Save icon appears in the navigation at the top of the page
-WHEN I click on the Save icon
-THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes
-WHEN I click on an existing note in the list in the left-hand column
-THEN that note appears in the right-hand column
-WHEN I click on the Write icon in the navigation at the top of the page
-THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column
-```
+8.  Once you have cloned the repository and downloaded Node.js and its necessary modules you are ready to use Note Taker!
 
+## Usage
+To use this app from any device you can navigate to the deployed app on Heroku.  The url for the deployed application is ( https://powerful-river-74307.herokuapp.com/ ).  To enter a note first click the pen icon to start a new note.  Click the note title textarea and enter your title then click the note text textarea below and enter your note text content.  To save your note click the save icon in the top right.  Your note will appear along the list of save notes on the left hand column.  To access previous notes click the saved note in the left hand column to view them in full.  Delete and edit functionality still in process. 
 
-## Mock-Up
+## License
+![MIT license](https://img.shields.io/badge/license-MIT-brightgreen)
+[MIT license](https://opensource.org/licenses/MIT)
+Copyright <YEAR> <COPYRIGHT HOLDER>
 
-The following images show the web application's appearance and functionality: 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-![Existing notes are listed in the left-hand column with empty fields on the right-hand side for the new note’s title and text.](./Assets/11-express-homework-demo-01.png)
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-![Note titled “Balance accounts” reads, “Balance account books by end of day Monday,” with other notes listed on the left.](./Assets/11-express-homework-demo-02.png)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+## Contributing
+If you wish to contribute to this project first read the steps listed above for installation and use.  Then you may make changes or develop new features as you see fit.  I am currently working on the optional "delete" feature.  Work on this feature  can be found by accessing the "feature/delete" branch for this repository.
 
-## Getting Started
+## Tests
+To test this app you can reference the db.json file in the "db" folder of the repository to check that your notes are being saved and updated accordingly.  This file houses all the notes data.  
 
-The application should have a `db.json` file on the back end that will be used to store and retrieve notes using the `fs` module.
-
-The following HTML routes should be created:
-
-* `GET /notes` should return the `notes.html` file.
-
-* `GET *` should return the `index.html` file.
-
-The following API routes should be created:
-
-* `GET /api/notes` should read the `db.json` file and return all saved notes as JSON.
-
-* `POST /api/notes` should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into `npm` packages that could do this for you).
-
-## Bonus
-
-You haven’t learned how to handle DELETE requests, but this application has that functionality in the front end. As a bonus, see if you can add the DELETE route to the application using the following guideline:
-
-* `DELETE /api/notes/:id` should receive a query parameter containing the id of a note to delete. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
-
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+## Questions
+For questions or concerns regarding this project or future collaborations please contact the author via GitHub at:
+https://github.com/nystephens

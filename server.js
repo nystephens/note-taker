@@ -24,11 +24,6 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 
-// sets up homepage when server is loaded
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
 // sets up response for /notes
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
@@ -63,7 +58,6 @@ app.post('/api/notes', function (req, res) {
     });
 });
 
-
 // DELETE /api/notes/:id should receive a query parameter containing the id of a note to delete. In order to delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
 app.delete('/api/notes/:id', (req, res) =>{
     let currentId = req.params.id;
@@ -73,9 +67,30 @@ app.delete('/api/notes/:id', (req, res) =>{
             console.log(error);
         }
         let notesArray = JSON.parse(result);
+
+
         
         // for loop, foreach or filter to go through notesArray and writeFile to db.json 
     })
+});
+
+// Erika's example:
+
+//delete a notes by id attempt that deletes from dbjson but not rendered view
+app.delete('/api/notes/:id', (req, res) => {
+    
+    notes.filter(notes =>  notes.id != req.params.id);
+    console.log(dbnotes.filter(dbnote => dbnote.id != req.params.id))
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(dbnotes.filter(dbnote => dbnote.id != req.params.id), null, 2)
+    );
+    res.send('This note will be deleted');
+});
+
+// sets up homepage when server is loaded
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 
