@@ -32,6 +32,8 @@ This is a simple note taking app that records notes for the user to reference at
 ## Usage
 To use this app from any device you can navigate to the deployed app on Heroku.  The url for the deployed application is ( https://powerful-river-74307.herokuapp.com/ ).  To enter a note first click the pen icon to start a new note.  Click the note title textarea and enter your title then click the note text textarea below and enter your note text content.  To save your note click the save icon in the top right.  Your note will appear along the list of save notes on the left hand column.  To access previous notes click the saved note in the left hand column to view them in full.  Delete and edit functionality still in process. 
 
+To run the server locally on your device first see the [Installation](#installation) section for instructions on how to download and install this repository and its files.  Navigate to the root directory in your terminal and run the command "npm start".  This will set up the terminal on path 3001 and you will be able to access the app from the url "localhost:3001/".  
+
 ## License
 ![MIT license](https://img.shields.io/badge/license-MIT-brightgreen)
 [MIT license](https://opensource.org/licenses/MIT)
